@@ -12,7 +12,7 @@ public class Bus extends Vehicle  {
 
     @Override
     public void performService() {
-        System.out.println("Bus service:changed oil and replaced mator");
+        System.out.println("Bus service:changed oil and replaced motor");
     }
 
     @Override

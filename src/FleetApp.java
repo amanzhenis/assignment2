@@ -6,9 +6,6 @@ public class FleetApp {
     public ArrayList<Servicable> vehicles1 = new ArrayList<>();
     Scanner cin = new Scanner(System.in);
 
-
-
-
     public void run() {
         while (true) {
             System.out.println(" 1. Print all vehicles\n" +
@@ -24,76 +21,99 @@ public class FleetApp {
 
             switch (choice) {
                 case 1:
-                    if(vehicles.size()>0) {
-                        for(int i=0;i<vehicles.size();i++) {
-                            System.out.println(vehicles.get(i).toString());
-                        }
-                    }
-                    else System.out.println("There are no vehicles");
+                    this.printAllVehicles();
                     break;
 
                 case 2:
-                    System.out.println("Enter car model: ");
-                    String model = cin.nextLine();
-                    System.out.println("Enter car year: ");
-                    int year = cin.nextInt();
-                    cin.nextLine();
-                    System.out.println("Enter car base price: ");
-                    double basePrice = cin.nextDouble();
-                    cin.nextLine();
-                    System.out.println("Enter car number of doors: ");
-                    int numberOfDoors = cin.nextInt();
-                    cin.nextLine();
-                    vehicles.add(new Car(model,year,basePrice,numberOfDoors));
-                    vehicles1.add(new Car(model,year,basePrice,numberOfDoors));
+                    this.addNewCar();
                     break;
 
                 case 3:
-                    System.out.println("Enter bus model: ");
-                    model = cin.nextLine();
-                    System.out.println("Enter bus year: ");
-                    year = cin.nextInt();
-                    cin.nextLine();
-                    System.out.println("Enter bus base price: ");
-                    basePrice = cin.nextDouble();
-                    cin.nextLine();
-                    System.out.println("Enter bus passenger capacity: ");
-                    int passengercapacity = cin.nextInt();
-                    cin.nextLine();
-                    vehicles.add(new Bus(model,year,basePrice,passengercapacity));
-                    vehicles1.add(new Bus(model,year,basePrice,passengercapacity));
+                    this.addNewBus();
                     break;
 
                 case 4:
-                    for(int  i=0;i<vehicles.size();i++) {
-                        System.out.println(vehicles.get(i).calculateInsuranceFee());
-                    }
+                    this.showInsuranceFee();
                     break;
 
                 case 5:
-                    int nn;
-                    System.out.println("Number N:");
-                    nn = cin.nextInt();
-                    cin.nextLine();
-                    for(int  i=0;i<vehicles.size();i++) {
-                        if(vehicles.get(i).getYear()<nn) {
-                            System.out.println(vehicles.get(i).toString());
-                        }
-                    }
+                    this.showOlderVehicles();
                     break;
 
                 case 6:
-                    for(int  i=0;i<vehicles.size();i++) {
-                        vehicles1.get(i).performService();
-                    }
+                    this.serviceForAll();
                     break;
 
                 case 7:
-                    System.out.print("GOOD BYE !!!! ");
+                    System.out.print("GOOD BYE !!! ");
                     return;
             }
         }
     }
+
+    private void printAllVehicles() {
+        if(vehicles.size()>0) {
+            for(int i=0;i<vehicles.size();i++) {
+                System.out.println(vehicles.get(i).toString());
+            }
+        }
+        else System.out.println("There are no vehicles");
+    }
+    private void addNewCar() {
+        System.out.println("Enter car model: ");
+        String model = cin.nextLine();
+        System.out.println("Enter car year: ");
+        int year = cin.nextInt();
+        cin.nextLine();
+        System.out.println("Enter car base price: ");
+        double basePrice = cin.nextDouble();
+        cin.nextLine();
+        System.out.println("Enter car number of doors: ");
+        int numberOfDoors = cin.nextInt();
+        cin.nextLine();
+        vehicles.add(new Car(model, year, basePrice, numberOfDoors));
+        vehicles1.add(new Car(model, year, basePrice, numberOfDoors));
+    }
+    private void addNewBus() {
+        System.out.println("Enter bus model: ");
+        String model = cin.nextLine();
+        System.out.println("Enter bus year: ");
+        int year = cin.nextInt();
+        cin.nextLine();
+        System.out.println("Enter bus base price: ");
+        double basePrice = cin.nextDouble();
+        cin.nextLine();
+        System.out.println("Enter bus passenger capacity: ");
+        int passengercapacity = cin.nextInt();
+        cin.nextLine();
+        vehicles.add(new Bus(model, year, basePrice, passengercapacity));
+        vehicles1.add(new Bus(model, year, basePrice, passengercapacity));
+    }
+
+    private void showInsuranceFee() {
+        for (int i = 0; i < vehicles.size(); i++) {
+            System.out.println(vehicles.get(i).calculateInsuranceFee());
+        }
+    }
+
+    private void showOlderVehicles() {
+        int nn;
+        System.out.println("Number N:");
+        nn = cin.nextInt();
+        cin.nextLine();
+        for (int i = 0; i < vehicles.size(); i++) {
+            if (vehicles.get(i).getYear() < nn) {
+                System.out.println(vehicles.get(i).toString());
+            }
+        }
+    }
+
+    private void serviceForAll() {
+        for (int i = 0; i < vehicles.size(); i++) {
+            vehicles1.get(i).performService();
+        }
+    }
+
     public static void main(String[] args) {
         new FleetApp().run();
     }
